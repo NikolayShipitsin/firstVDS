@@ -1,4 +1,4 @@
-FROM hub.550550.ru/python:3.9-slim-buster
+FROM python:3.9-slim-buster
 ENV PYTHONUNBUFFERED=1
 COPY requirementsAPI.txt requirements.txt
 RUN pip install -r requirements.txt && pip cache purge && rm requirements.txt
