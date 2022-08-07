@@ -5,5 +5,6 @@ RUN pip install -r requirements.txt && pip cache purge && rm requirements.txt
 WORKDIR /app/
 COPY src/API .
 COPY src/workers/workers.py .
+COPY data.csv data/
 
 ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0"]
