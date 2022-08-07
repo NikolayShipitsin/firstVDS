@@ -1,5 +1,7 @@
 
+import os
 from fastapi import FastAPI, HTTPException
+
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from celery.result import AsyncResult
@@ -7,12 +9,16 @@ from celery.result import AsyncResult
 
 import workers
 
+FILE_DIR = "data"
 class Argument(BaseModel):
     first: int
     second: int
 
 class Status(BaseModel):
     task_id: str
+
+class FileNmae(BaseModel):
+    filename: str
 
 app = FastAPI()
 
@@ -23,8 +29,11 @@ async def root():
 
 
 @app.post("/Createtask")
-async def create_task(arguments: Argument):
-    task = workers.sum.delay(arguments.first, arguments.second)
+async def create_task(filename: FileNmae):
+    file_path = os.path.join(FILE_DIR, filename.filename)
+    if not os.path.exists(file_path):
+        return JSONResponse(status_code=422, content = {"message": "file not found"})
+    task = workers.sum.delay(filename.filename)
     return JSONResponse(status_code=201, content = {"task_id": task.id})
 
 @app.post("/getstatus")
