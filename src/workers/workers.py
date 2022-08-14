@@ -33,7 +33,7 @@ def processing_file(file_obj):
     first_line = True
     accum = []
     for line in file_obj:
-        line = line.replace('"', '') # истим строку в файле от ненжуных кавычек. т.к файл не чистый csv.
+        line = line.replace('"', '') # чистим строку в файле от ненжуных кавычек. т.к файл не чистый csv.
         if first_line:
             columns = line.split(",")
             columns = columns[1::10] # берем каждый 10 столбец, нулеой индекс пропускаем т.к в нем дата.
