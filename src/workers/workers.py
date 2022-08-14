@@ -11,11 +11,6 @@ FILE_DIR = "data"
 app = Celery('workers', broker=CELERY_BROKER_URL, backend = CELERY_RESULT_BACKEND)
 
 
-# @app.task
-# def sum(x, y):
-#     time.sleep(55)
-#     return x + y
-
 @app.task(bind=True)
 def sum(self, filename):
     file_path = os.path.join(FILE_DIR, filename)
@@ -31,14 +26,17 @@ def sum(self, filename):
     return result
 
 
+# обработка файла.
+# файл обрабатвем построчно, используя генератор, 
+# который возвращает по одной строке из файла т.к файл может быть большим
 def processing_file(file_obj):
     first_line = True
     accum = []
     for line in file_obj:
-        line = line.replace('"', '')
+        line = line.replace('"', '') # истим строку в файле от ненжуных кавычек. т.к файл не чистый csv.
         if first_line:
             columns = line.split(",")
-            columns = columns[1::10]
+            columns = columns[1::10] # берем каждый 10 столбец, нулеой индекс пропускаем т.к в нем дата.
             for _ in range(len(columns)):
                 accum.append(0)
             first_line = False
