@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "d961d644-93ae-486e-b3ad-273835de5f70",
+		"name": "CeleryAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10747615"
+	},
+	"item": [
+		{
+			"name": "CreateTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first\": 5,\n    \"second\": 11\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8005/Createtask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8005",
+					"path": [
+						"Createtask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"task_id\": \"dadbe1ca-b6e7-4b35-bdee-a912ccb19be5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.24.68:8005/getstatus",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"24",
+						"68"
+					],
+					"port": "8005",
+					"path": [
+						"getstatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.24.68:8005/gettasks",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"24",
+						"68"
+					],
+					"port": "8005",
+					"path": [
+						"gettasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
