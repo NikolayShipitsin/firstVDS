@@ -4,6 +4,5 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt && pip cache purge && rm requirements.txt
 WORKDIR /app/
 COPY src/workers/workers.py workers.py
-COPY data.csv data/
 
 ENTRYPOINT ["celery", "-A", "workers", "worker", "--loglevel=INFO"]
